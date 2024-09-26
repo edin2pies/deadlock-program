@@ -1,1 +1,1 @@
-# deadlock-program
+A small program in Python using Django that asks the user for a list of heroes in their match, the hero they're playing, and spits out the items that counter said heroes. Prioritizing items that work best on their hero. Organized by which items counter more than one hero.
