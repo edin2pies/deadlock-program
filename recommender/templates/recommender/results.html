@@ -1,0 +1,52 @@
+<!-- recommender/templates/recommender/results.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommended Items</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { width: 70%; margin: auto; padding: 20px; background: white; margin-top: 50px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; }
+        .section { margin-top: 30px; }
+        .item { background-color: #e9ecef; padding: 15px; border-radius: 5px; margin-bottom: 10px; }
+        .item h3 { margin-top: 0; }
+        a { display: block; text-align: center; margin-top: 20px; color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recommended Items to Counter the Enemy Team</h1>
+        <h2>Your Hero: {{ player_hero }}</h2>
+        
+        {% if preferred_sorted %}
+            <div class="section">
+                <h3>Preferred Items:</h3>
+                {% for item, details in preferred_sorted %}
+                    <div class="item">
+                        <h4>{{ item }}</h4>
+                        <p><strong>Counters:</strong> {{ details.count }} hero(es)</p>
+                        <p><strong>Affected Heroes:</strong> {{ details.heroes|join:", " }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% if remaining_sorted %}
+            <div class="section">
+                <h3>Other Recommended Items:</h3>
+                {% for item, details in remaining_sorted %}
+                    <div class="item">
+                        <h4>{{ item }}</h4>
+                        <p><strong>Counters:</strong> {{ details.count }} hero(es)</p>
+                        <p><strong>Affected Heroes:</strong> {{ details.heroes|join:", " }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <a href="{% url 'home' %}">Back to Home</a>
+    </div>
+</body>
+</html>
