@@ -24,3 +24,41 @@ Follow these steps to set up the project locally:
 ```bash
 git clone https://github.com/yourusername/game-item-recommender.git
 cd game-item-recommender
+```
+
+### 2. Create a Virtual Environment (optional)
+
+```bash
+python -m venv env
+source env/bin/activate  # On Windows use `env\Scripts\activate`
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Collect Static Files with
+
+```bash
+python manage.py collectstatic
+```
+
+### 5. Apply Migrations
+
+```bash
+python manage.py migrate
+```
+
+### 6. Run the Server
+
+```bash
+python manage.py runserver
+```
+
+Visit http://127.0.0.1:8000/ in your browser to see the app in action.
+
+## Contributing
+
+Feel free to fork the project, make improvements, and submit pull requests.
