@@ -1,52 +1,91 @@
 <!-- recommender/templates/recommender/home.html -->
 
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Item Recommender</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
-        .container { width: 50%; margin: auto; padding: 20px; background: white; margin-top: 50px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        select, .checkbox-group { width: 100%; padding: 8px; }
-        .checkbox-group label { display: inline-block; margin-right: 10px; }
-        .error { color: red; margin-bottom: 15px; }
-        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 4px; }
-        button:hover { background-color: #218838; }
-    </style>
+    <link rel="stylesheet" href="{% static 'recommender/styles.css' %}">
 </head>
 <body>
+    <!-- Dark Mode Toggle -->
+    <div class="toggle-switch">
+        <label for="theme-toggle">Dark Mode</label>
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
     <div class="container">
         <h1>Game Item Recommender</h1>
+
         {% if error %}
-            <div class="error">{{ error }}</div>
+            <p class="error">{{ error }}</p>
         {% endif %}
-        <form method="POST">
+
+        <form method="POST" onsubmit="return validateForm()">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="player_hero">Your Hero:</label>
-                <select id="player_hero" name="player_hero" required>
-                    <option value="">Select Your Hero</option>
-                    {% for hero in heroes %}
-                        <option value="{{ hero }}">{{ hero }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Enemy Team Heroes:</label>
-                <div class="checkbox-group">
-                    {% for hero in heroes %}
-                        <label>
-                            <input type="checkbox" name="enemy_heroes" value="{{ hero }}"> {{ hero }}
-                        </label>
-                    {% endfor %}
-                </div>
-            </div>
+            <label for="player_hero">Select Your Hero:</label>
+            <select name="player_hero" id="player_hero">
+                <option value="">--Select a Hero--</option>
+                {% for hero in heroes %}
+                    <option value="{{ hero }}">{{ hero }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="enemy_heroes">Select Enemy Heroes:</label>
+            <select name="enemy_heroes" id="enemy_heroes" multiple>
+                {% for hero in heroes %}
+                    <option value="{{ hero }}">{{ hero }}</option>
+                {% endfor %}
+            </select>
+
             <button type="submit">Get Recommended Items</button>
         </form>
     </div>
+
+    <script>
+        function validateForm() {
+            const playerHero = document.getElementById('player_hero').value;
+            const enemyHeroes = document.getElementById('enemy_heroes').selectedOptions;
+
+            if (!playerHero) {
+                alert('Please select your hero.');
+                return false;
+            }
+
+            if (enemyHeroes.length === 0) {
+                alert('Please select at least one enemy hero.');
+                return false;
+            }
+
+            return true;
+        }
+
+        // Dark Mode Toggle Script
+        const toggleSwitch = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        toggleSwitch.addEventListener('change', function(event) {
+            if (event.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 </body>
 </html>
-

@@ -1,52 +1,80 @@
 <!-- recommender/templates/recommender/results.html -->
 
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommended Items</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
-        .container { width: 70%; margin: auto; padding: 20px; background: white; margin-top: 50px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { text-align: center; }
-        .section { margin-top: 30px; }
-        .item { background-color: #e9ecef; padding: 15px; border-radius: 5px; margin-bottom: 10px; }
-        .item h3 { margin-top: 0; }
-        a { display: block; text-align: center; margin-top: 20px; color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="{% static 'recommender/styles.css' %}">
 </head>
 <body>
+    <!-- Dark Mode Toggle -->
+    <div class="toggle-switch">
+        <label for="theme-toggle">Dark Mode</label>
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
     <div class="container">
-        <h1>Recommended Items to Counter the Enemy Team</h1>
-        <h2>Your Hero: {{ player_hero }}</h2>
-        
-        {% if preferred_sorted %}
-            <div class="section">
-                <h3>Preferred Items:</h3>
-                {% for item, details in preferred_sorted %}
-                    <div class="item">
-                        <h4>{{ item }}</h4>
-                        <p><strong>Counters:</strong> {{ details.count }} hero(es)</p>
-                        <p><strong>Affected Heroes:</strong> {{ details.heroes|join:", " }}</p>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        
-        {% if remaining_sorted %}
-            <div class="section">
-                <h3>Other Recommended Items:</h3>
-                {% for item, details in remaining_sorted %}
-                    <div class="item">
-                        <h4>{{ item }}</h4>
-                        <p><strong>Counters:</strong> {{ details.count }} hero(es)</p>
-                        <p><strong>Affected Heroes:</strong> {{ details.heroes|join:", " }}</p>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        
+        <h1>Recommended Items for {{ player_hero }}</h1>
+
+        <div class="results">
+            {% if preferred_sorted %}
+                <h2>Preferred Items:</h2>
+                <ul>
+                    {% for item, details in preferred_sorted %}
+                        <li>
+                            <strong>{{ item }}</strong><br>
+                            - Counters {{ details.count }} hero(es)<br>
+                            - Affected heroes: {{ details.heroes|join:", " }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if remaining_sorted %}
+                <h2>Other Recommended Items:</h2>
+                <ul>
+                    {% for item, details in remaining_sorted %}
+                        <li>
+                            <strong>{{ item }}</strong><br>
+                            - Counters {{ details.count }} hero(es)<br>
+                            - Affected heroes: {{ details.heroes|join:", " }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
         <a href="{% url 'home' %}">Back to Home</a>
     </div>
+
+    <script>
+        // Dark Mode Toggle Script
+        const toggleSwitch = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        toggleSwitch.addEventListener('change', function(event) {
+            if (event.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 </body>
 </html>
