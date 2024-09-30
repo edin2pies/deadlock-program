@@ -112,3 +112,28 @@ def prioritize_items(preferred, counter_items):
             remaining.append((item, details))
     
     return prioritized, remaining
+
+hero_stats_growth = {
+    "abrams": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "bebop": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "dynamo": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "grey talon": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "haze": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "infernus": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "ivy": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "kelvin": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "lady geist": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "lash": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "mcGinnis": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "mo & krill": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "paradox": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "pocket": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "seven": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "shiv": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "vindicta": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "viscous": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "warden": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "wraith": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    "yamato": {"base_health": 600, "health_growth": 32, "base_damage": 20, "damage_growth": 2, "base_light": 63, "light_growth": 3.4, "base_heavy": 116, "heavy_growth": 3.4},
+    # Add other heroes with their respective growth values
+}

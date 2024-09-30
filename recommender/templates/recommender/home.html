@@ -6,77 +6,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Item Recommender</title>
+    <title>Home</title>
     <link rel="stylesheet" href="{% static 'recommender/styles.css' %}">
 </head>
 <body>
-    <!-- Dark Mode Toggle -->
-    <div class="toggle-switch">
-        <label for="theme-toggle">Dark Mode</label>
-        <label class="switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-        </label>
-    </div>
-
-    <div class="container">
-        <h1>Game Item Recommender</h1>
-
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-
-        <form method="POST" onsubmit="return validateForm()">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="player_hero">Select Your Hero:</label>
-                <select name="player_hero" id="player_hero" class="form-control">
-                    <option value="">--Select a Hero--</option>
-                    {% for hero in heroes %}
-                        <option value="{{ hero }}">{{ hero }}</option>
-                    {% endfor %}
-                </select>
+    <header>
+        <div class="container">
+            <h1>Learn Deadlock</h1>
+        <nav class="nav-bar">
+            <a href="{% url 'item_recommender' %}" class="nav-link">Item Recommender</a>
+            <a href="{% url 'hero_stats' %}" class="nav-link">Hero Stats</a>
+            <div class="toggle-switch">
+                <label for="theme-toggle">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
             </div>
-
-            <div class="form-group">
-                <label>Select Enemy Heroes:</label>
-                <div class="checkbox-list">
-                    {% for hero in heroes %}
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="enemy_{{ forloop.counter }}" name="enemy_heroes" value="{{ hero }}">
-                            <img src="{% static 'recommender/icons/'|add:hero|add:'.png' %}" alt="{{ hero }}" class="hero-icon">
-                            <label for="enemy_{{ forloop.counter }}">{{ hero }}</label>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- Button Group -->
-            <div class="button-group">
-                <button type="submit" class="btn-submit">Get Recommended Items</button>
-                <button type="button" class="btn-clear" onclick="clearSelections()">Clear Selections</button>
-            </div>
-        </form>
-    </div>
+        </nav>
+    </header>
 
     <script>
-        function validateForm() {
-            const playerHero = document.getElementById('player_hero').value;
-            const enemyHeroes = document.querySelectorAll('input[name="enemy_heroes"]:checked');
-
-            if (!playerHero) {
-                alert('Please select your hero.');
-                return false;
-            }
-
-            if (enemyHeroes.length === 0) {
-                alert('Please select at least one enemy hero.');
-                return false;
-            }
-
-            return true;
-        }
-
         // Dark Mode Toggle Script
         const toggleSwitch = document.getElementById('theme-toggle');
         const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
@@ -98,33 +48,7 @@
                 localStorage.setItem('theme', 'light');
             }
         });
-
-        // Clear Selections Script
-        function clearSelections() {
-            // Reset the player hero selection
-            document.getElementById('player_hero').selectedIndex = 0;
-
-            // Uncheck all enemy hero checkboxes
-            const checkboxes = document.querySelectorAll('input[name="enemy_heroes"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-
-            // Uncheck the "Select All" checkbox if it's checked
-            const selectAll = document.getElementById('select_all');
-            if (selectAll.checked) {
-                selectAll.checked = false;
-            }
-        }
-
-        // Toggle Select All Checkboxes
-        function toggleSelectAll(source) {
-            const checkboxes = document.querySelectorAll('input[name="enemy_heroes"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = source.checked;
-            });
-        }
     </script>
+
 </body>
 </html>
-
