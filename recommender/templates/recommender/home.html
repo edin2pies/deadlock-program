@@ -11,19 +11,28 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Learn Deadlock</h1>
-        <nav class="nav-bar">
-            <a href="{% url 'item_recommender' %}" class="nav-link">Item Recommender</a>
-            <a href="{% url 'hero_stats' %}" class="nav-link">Hero Stats</a>
-            <div class="toggle-switch">
-                <label for="theme-toggle">Dark Mode</label>
-                <label class="switch">
-                    <input type="checkbox" id="theme-toggle">
-                    <span class="slider"></span>
-                </label>
+        <div class="page-wrapper">
+            <div class="container">
+                <h1>Learn Deadlock</h1>
+            <nav class="nav-bar">
+                <a href="{% url 'item_recommender' %}" class="nav-link">Item Recommender</a>
+                <a href="{% url 'hero_stats' %}" class="nav-link">Hero Stats</a>
+                <div class="toggle-switch">
+                    <label for="theme-toggle">Dark Mode</label>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </nav>
             </div>
-        </nav>
+
+            <footer class="footer">
+                <p>&copy; 2024 Edin Beteivaz. All rights reserved.</p>
+                <p>Contact: edinbeteivaz@gmail.com | GitHub: <a href="https://github.com/edin2pies" target="_blank">edin2pies</a></p>
+            </footer>
+
+        </div>
     </header>
 
     <script>

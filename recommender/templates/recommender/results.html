@@ -21,39 +21,45 @@
             <span class="slider"></span>
         </label>
     </div>
+    <div class="page-wrapper">
+        <div class="container">
+            <h1>Recommended Items for {{ player_hero }}</h1>
 
-    <div class="container">
-        <h1>Recommended Items for {{ player_hero }}</h1>
+            <div class="results">
+                {% if preferred_sorted %}
+                    <h2>Preferred Items:</h2>
+                    <ul>
+                        {% for item, details in preferred_sorted %}
+                            <li>
+                                <strong>{{ item }}</strong><br>
+                                - Counters {{ details.count }} hero(es)<br>
+                                - Affected heroes: {{ details.heroes|join:", " }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
-        <div class="results">
-            {% if preferred_sorted %}
-                <h2>Preferred Items:</h2>
-                <ul>
-                    {% for item, details in preferred_sorted %}
-                        <li>
-                            <strong>{{ item }}</strong><br>
-                            - Counters {{ details.count }} hero(es)<br>
-                            - Affected heroes: {{ details.heroes|join:", " }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+                {% if remaining_sorted %}
+                    <h2>Other Recommended Items:</h2>
+                    <ul>
+                        {% for item, details in remaining_sorted %}
+                            <li>
+                                <strong>{{ item }}</strong><br>
+                                - Counters {{ details.count }} hero(es)<br>
+                                - Affected heroes: {{ details.heroes|join:", " }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
 
-            {% if remaining_sorted %}
-                <h2>Other Recommended Items:</h2>
-                <ul>
-                    {% for item, details in remaining_sorted %}
-                        <li>
-                            <strong>{{ item }}</strong><br>
-                            - Counters {{ details.count }} hero(es)<br>
-                            - Affected heroes: {{ details.heroes|join:", " }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            <a href="{% url 'home' %}" class="btn-clear">Back to Home</a>
         </div>
 
-        <a href="{% url 'home' %}">Back to Home</a>
+        <footer class="footer">
+            <p>&copy; 2024 Edin Beteivaz. All rights reserved.</p>
+            <p>Contact: edinbeteivaz@gmail.com | GitHub: <a href="https://github.com/edin2pies" target="_blank">edin2pies</a></p>
+        </footer>
     </div>
 
     <!-- Bootstrap JS Bundle with Popper -->

@@ -10,57 +10,65 @@
     <link rel="stylesheet" href="{% static 'recommender/styles.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h1>Hero Stats</h1>
-        
-        <!-- Dark Mode Toggle -->
-        <div class="toggle-switch">
-            <label for="theme-toggle">Dark Mode</label>
-            <label class="switch">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
-            </label>
+    <div class="page-wrapper">
+        <div class="container">
+            <h1>Hero Stats</h1>
+            
+            <!-- Dark Mode Toggle -->
+            <div class="toggle-switch">
+                <label for="theme-toggle">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <form method="GET" action="{% url 'hero_stats' %}">
+                <div class="form-group">
+                    <label for="hero-select">Select Hero:</label>
+                    <select id="hero-select" name="hero" class="form-control">
+                        {% for hero in hero_names %}
+                            <option value="{{ hero }}" {% if hero == selected_hero %}selected{% endif %}>{{ hero|title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="level-select">Select Level:</label>
+                    <select id="level-select" name="level" class="form-control">
+                        {% for i in levels %}
+                            <option value="{{ i }}" {% if i == selected_level %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">Show Stats</button>
+                    <a href="{% url 'home' %}" class="btn-clear">Back to Home</a>
+                </div>
+
+            </form>
+
+            {% if hero_stats %}
+                <h2>Stats for {{ hero_stats.name|title }} at Level {{ hero_stats.level }}</h2>
+                <p>Base Health: {{ hero_stats.base_health }}</p>
+                <p>Health at Level {{ hero_stats.level }}: {{ hero_stats.current_health }}</p>
+                <p>Base Damage: {{ hero_stats.base_damage }}</p>
+                <p>Damage at Level {{ hero_stats.level }}: {{ hero_stats.current_damage }}</p>
+                <p>Base Light Melee Damage: {{ hero_stats.base_light }}</p>
+                <p>Light Melee Damage at Level {{ hero_stats.level }}: {{ hero_stats.current_light }}</p>
+                <p>Base Heavy Melee Damage: {{ hero_stats.base_heavy }}</p>
+                <p>Heavy Melee Damage at Level {{ hero_stats.level }}: {{ hero_stats.current_heavy }}</p>
+            {% else %}
+                <p>Select a hero and level to see their stats.</p>
+            {% endif %}        
         </div>
 
-        <form method="GET" action="{% url 'hero_stats' %}">
-            <div class="form-group">
-                <label for="hero-select">Select Hero:</label>
-                <select id="hero-select" name="hero" class="form-control">
-                    {% for hero in hero_names %}
-                        <option value="{{ hero }}" {% if hero == selected_hero %}selected{% endif %}>{{ hero|title }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="level-select">Select Level:</label>
-                <select id="level-select" name="level" class="form-control">
-                    {% for i in levels %}
-                        <option value="{{ i }}" {% if i == selected_level %}selected{% endif %}>{{ i }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+        <footer class="footer">
+            <p>&copy; 2024 Edin Beteivaz. All rights reserved.</p>
+            <p>Contact: edinbeteivaz@gmail.com | GitHub: <a href="https://github.com/edin2pies" target="_blank">edin2pies</a></p>
+        </footer>
 
-            <div class="button-group">
-                <button type="submit" class="btn-submit">Show Stats</button>
-                <a href="{% url 'home' %}" class="btn-clear">Back to Home</a>
-            </div>
-            
-        </form>
-
-        {% if hero_stats %}
-            <h2>Stats for {{ hero_stats.name|title }} at Level {{ hero_stats.level }}</h2>
-            <p>Base Health: {{ hero_stats.base_health }}</p>
-            <p>Health at Level {{ hero_stats.level }}: {{ hero_stats.current_health }}</p>
-            <p>Base Damage: {{ hero_stats.base_damage }}</p>
-            <p>Damage at Level {{ hero_stats.level }}: {{ hero_stats.current_damage }}</p>
-            <p>Base Light Melee Damage: {{ hero_stats.base_light }}</p>
-            <p>Light Melee Damage at Level {{ hero_stats.level }}: {{ hero_stats.current_light }}</p>
-            <p>Base Heavy Melee Damage: {{ hero_stats.base_heavy }}</p>
-            <p>Heavy Melee Damage at Level {{ hero_stats.level }}: {{ hero_stats.current_heavy }}</p>
-        {% else %}
-            <p>Select a hero and level to see their stats.</p>
-        {% endif %}        
     </div>
 
     <script>

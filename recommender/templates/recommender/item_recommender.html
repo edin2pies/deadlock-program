@@ -18,45 +18,51 @@
             <span class="slider"></span>
         </label>
     </div>
+    <div class="page-wrapper">
+        <div class="container">
+            <h1>Game Item Recommender</h1>
 
-    <div class="container">
-        <h1>Game Item Recommender</h1>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-
-        <form method="POST" onsubmit="return validateForm()">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="player_hero">Select Your Hero:</label>
-                <select name="player_hero" id="player_hero" class="form-control">
-                    <option value="">--Select a Hero--</option>
-                    {% for hero in heroes %}
-                        <option value="{{ hero }}">{{ hero }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Select Enemy Heroes:</label>
-                <div class="checkbox-list">
-                    {% for hero in heroes %}
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="enemy_{{ forloop.counter }}" name="enemy_heroes" value="{{ hero }}">
-                            <img src="{% static 'recommender/icons/'|add:hero|add:'.png' %}" alt="{{ hero }}" class="hero-icon">
-                            <label for="enemy_{{ forloop.counter }}">{{ hero }}</label>
-                        </div>
-                    {% endfor %}
+            <form method="POST" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="player_hero">Select Your Hero:</label>
+                    <select name="player_hero" id="player_hero" class="form-control">
+                        <option value="">--Select a Hero--</option>
+                        {% for hero in heroes %}
+                            <option value="{{ hero }}">{{ hero }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-            </div>
 
-            <!-- Button Group -->
-            <div class="button-group">
-                <button type="submit" class="btn-submit">Get Recommended Items</button>
-                <button type="button" class="btn-clear" onclick="clearSelections()">Clear Selections</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label>Select Enemy Heroes:</label>
+                    <div class="checkbox-list">
+                        {% for hero in heroes %}
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="enemy_{{ forloop.counter }}" name="enemy_heroes" value="{{ hero }}">
+                                <img src="{% static 'recommender/icons/'|add:hero|add:'.png' %}" alt="{{ hero }}" class="hero-icon">
+                                <label for="enemy_{{ forloop.counter }}">{{ hero }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">Get Recommended Items</button>
+                    <button type="button" class="btn-clear" onclick="clearSelections()">Clear Selections</button>
+                </div>
+            </form>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Edin Beteivaz. All rights reserved.</p>
+        <p>Contact: edinbeteivaz@gmail.com | GitHub: <a href="https://github.com/edin2pies" target="_blank">edin2pies</a></p>
+    </footer>
     </div>
 
     <script>
