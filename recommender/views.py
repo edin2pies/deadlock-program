@@ -25,10 +25,10 @@ def hero_stats(request):
         heavy_growth = hero_stats_data[selected_hero]['heavy_growth']
 
         # Calculate current stats
-        current_health = base_health + (health_growth * (selected_level - 1))
-        current_damage = base_damage + (damage_growth * (selected_level - 1))
-        current_light = base_light + (light_growth * (selected_level - 1))
-        current_heavy = base_heavy + (heavy_growth * (selected_level -1))
+        current_health = round(base_health + (health_growth * (selected_level)))
+        current_damage = round(base_damage + (damage_growth * (selected_level)))
+        current_light = round(base_light + (light_growth * (selected_level)))
+        current_heavy = round(base_heavy + (heavy_growth * (selected_level)))
 
         # Create a dictionary for template rendering
         hero_stats = {
