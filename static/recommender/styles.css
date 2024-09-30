@@ -65,6 +65,10 @@ body {
     min-height: 100vh;
 }
 
+.title {
+    text-decoration: none;
+}
+
 /* Footer */
 .footer {
     padding: 20px;
@@ -102,6 +106,7 @@ h1, h2 {
     margin-bottom: 20px;
     color: var(--primary-color);
     text-align: center;
+    text-decoration: none;
 }
 
 /* Forms */

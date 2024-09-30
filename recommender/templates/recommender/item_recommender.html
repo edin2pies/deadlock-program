@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Recommender</title>
+    <title>Item Recommender • Deadlock</title>
     <link rel="stylesheet" href="{% static 'recommender/styles.css' %}">
 </head>
 <body>
@@ -20,7 +20,7 @@
     </div>
     <div class="page-wrapper">
         <div class="container">
-            <h1>Game Item Recommender</h1>
+            <a href="{% url 'home' %}"><h1>Game Item Recommender</h1></a>
 
             {% if error %}
                 <p class="error">{{ error }}</p>
