@@ -1,7 +1,6 @@
-/* static/recommender/styles.css */
+/* recommender/static/recommender/styles.css */
 
-/* Reset and base styles */
-
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -25,11 +24,11 @@ body {
     --button-text: #ffffff;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
     --background-color: #121212;
-    --text-color: #ffffff;
+    --text-color: #f5f5f5;
     --primary-color: #bb86fc;
-    --secondary-color: #1f1f1f;
+    --secondary-color: #1e1e1e;
     --button-background: #bb86fc;
     --button-text: #121212;
 }
@@ -41,77 +40,120 @@ body {
     padding: 20px;
     background-color: var(--secondary-color);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 /* Headings */
 h1, h2 {
     margin-bottom: 20px;
     color: var(--primary-color);
+    text-align: center;
 }
 
 /* Forms */
-form {
-    display: flex;
-    flex-direction: column;
+.form-group {
+    margin-bottom: 20px;
 }
 
 label {
-    margin-bottom: 5px;
+    display: block;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
-select, input[type="text"] {
+.form-control {
+    width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: var(--background-color);
     color: var(--text-color);
 }
 
-button {
+/* CSS for the hero selection with icons */
+.hero-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.hero-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.hero-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+/* Checkbox List */
+.checkbox-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    width: 45%;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-submit,
+.btn-clear {
+    flex: 1;
     padding: 12px;
-    background-color: var(--button-background);
-    color: var(--button-text);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s, transform 0.2;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-submit {
+    background-color: var(--button-background);
+    color: var(--button-text);
+}
+
+.btn-submit:hover {
+    background-color: #3e8e41; /* Slightly darker shade */
+    transform: translateY(-2px);
+}
+
+.btn-clear {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+.btn-clear:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
 }
 
 /* Error Message */
 .error {
     color: red;
     margin-bottom: 20px;
-}
-
-/* Results */
-.results {
-    margin-top: 30px;
-}
-
-.results h2 {
-    margin-bottom: 10px;
-}
-
-.results ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.results li {
-    background-color: var(--background-color);
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 /* Dark Mode Toggle Switch */
 .toggle-switch {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     display: flex;
@@ -175,8 +217,13 @@ input:checked + .slider:before {
         padding: 15px;
     }
 
-    button {
-        font-size: 14px;
+    .checkbox-item {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
     }
 
     .toggle-switch {

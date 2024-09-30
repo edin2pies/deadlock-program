@@ -28,29 +28,41 @@
 
         <form method="POST" onsubmit="return validateForm()">
             {% csrf_token %}
-            <label for="player_hero">Select Your Hero:</label>
-            <select name="player_hero" id="player_hero">
-                <option value="">--Select a Hero--</option>
-                {% for hero in heroes %}
-                    <option value="{{ hero }}">{{ hero }}</option>
-                {% endfor %}
-            </select>
+            <div class="form-group">
+                <label for="player_hero">Select Your Hero:</label>
+                <select name="player_hero" id="player_hero" class="form-control">
+                    <option value="">--Select a Hero--</option>
+                    {% for hero in heroes %}
+                        <option value="{{ hero }}">{{ hero }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-            <label for="enemy_heroes">Select Enemy Heroes:</label>
-            <select name="enemy_heroes" id="enemy_heroes" multiple>
-                {% for hero in heroes %}
-                    <option value="{{ hero }}">{{ hero }}</option>
-                {% endfor %}
-            </select>
+            <div class="form-group">
+                <label>Select Enemy Heroes:</label>
+                <div class="checkbox-list">
+                    {% for hero in heroes %}
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="enemy_{{ forloop.counter }}" name="enemy_heroes" value="{{ hero }}">
+                            <img src="{% static 'recommender/icons/'|add:hero|add:'.png' %}" alt="{{ hero }}" class="hero-icon">
+                            <label for="enemy_{{ forloop.counter }}">{{ hero }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-            <button type="submit">Get Recommended Items</button>
+            <!-- Button Group -->
+            <div class="button-group">
+                <button type="submit" class="btn-submit">Get Recommended Items</button>
+                <button type="button" class="btn-clear" onclick="clearSelections()">Clear Selections</button>
+            </div>
         </form>
     </div>
 
     <script>
         function validateForm() {
             const playerHero = document.getElementById('player_hero').value;
-            const enemyHeroes = document.getElementById('enemy_heroes').selectedOptions;
+            const enemyHeroes = document.querySelectorAll('input[name="enemy_heroes"]:checked');
 
             if (!playerHero) {
                 alert('Please select your hero.');
@@ -86,6 +98,33 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        // Clear Selections Script
+        function clearSelections() {
+            // Reset the player hero selection
+            document.getElementById('player_hero').selectedIndex = 0;
+
+            // Uncheck all enemy hero checkboxes
+            const checkboxes = document.querySelectorAll('input[name="enemy_heroes"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Uncheck the "Select All" checkbox if it's checked
+            const selectAll = document.getElementById('select_all');
+            if (selectAll.checked) {
+                selectAll.checked = false;
+            }
+        }
+
+        // Toggle Select All Checkboxes
+        function toggleSelectAll(source) {
+            const checkboxes = document.querySelectorAll('input[name="enemy_heroes"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = source.checked;
+            });
+        }
     </script>
 </body>
 </html>
+
