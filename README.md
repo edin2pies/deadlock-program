@@ -22,7 +22,7 @@ Follow these steps to set up the project locally:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/game-item-recommender.git
+git clone https://github.com/edin2pies/deadlock-program.git
 cd game-item-recommender
 ```
 
